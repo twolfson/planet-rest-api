@@ -82,6 +82,19 @@ class Asset(object):
         if self.name[0] in ['-', '_']:
             abort(400, 'Name begins with a dash or underscore')
 
+        # Validate our asset type
+        if self.type not in self.VALID_TYPES:
+            abort(400, 'Invalid asset type. Should be "satellite" or "antenna"')
+
+        # Verify our type is in our matching classes as sanity for developers
+        if self.type not in self.VALID_CLASSES:
+            raise RuntimeError('Encountered unexpected asset type "{type}"'.format(type=self.type))
+
+        # Validate our asset class matches our type
+        matching_classes = self.VALID_CLASSES[self.type]
+        if self.klass not in matching_classes:
+            abort(400, 'Invalid asset class. Should match asset\'s expected types')
+
     def serialize(self):
         return {
             'name': self.name,
