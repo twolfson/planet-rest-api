@@ -7,9 +7,26 @@ asset_map = {}
 
 # Define our Asset class
 class Asset(object):
-    def __init__(self, name):
+    # Define our constants
+    TYPE_SATELLITE = 'satellite'
+    TYPE_ANTENNA = 'antenna'
+    VALID_TYPES = [TYPE_SATELLITE, TYPE_ANTENNA]
+
+    CLASS_SATELLITE_DOVE = 'dove'
+    CLASS_SATELLITE_RAPIDEYE = 'rapideye'
+    CLASS_ANTENNA_DISH = 'dish'
+    CLASS_ANTENNA_YAGI = 'yagi'
+    VALID_CLASSES = {
+        TYPE_SATELLITE: [CLASS_SATELLITE_DOVE, CLASS_SATELLITE_RAPIDEYE],
+        TYPE_ANTENNA: [CLASS_ANTENNA_DISH, CLASS_ANTENNA_YAGI],
+    }
+
+    # Define our methods
+    def __init__(self, name, type, klass):
         # Save our model information
         self.name = name
+        self.type = type
+        self.klass = klass
 
     def save(self):
         # Run validation
@@ -25,6 +42,8 @@ class Asset(object):
     def serialize(self):
         return {
             'name': self.name,
+            'type': self.type,
+            'class': self.klass,
         }
 
     @classmethod

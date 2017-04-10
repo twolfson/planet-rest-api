@@ -11,8 +11,10 @@ Asset = planet_rest_api.Asset
 # DEV: In a database setup, these would be separate files
 #   but this is a trivial project
 FIXTURES = {
-    'dove': {
-        'name': 'Dove',
+    'satellite1': {
+        'name': 'Satellite 1',
+        'type': Asset.TYPE_SATELLITE,
+        'klass': Asset.CLASS_SATELLITE_DOVE,
     }
 }
 

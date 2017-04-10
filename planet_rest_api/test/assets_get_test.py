@@ -14,9 +14,13 @@ class AssetsGetTestCase(ApiTestCase):
 
     def test_non_empty(self):
         # A request to a non-empty `GET /assets` endpoint
-        self.install_fixtures(['dove'])
+        self.install_fixtures(['satellite1'])
         rv = self.get_response('/assets')
 
         # receives expected assets
         self.assertEqual(rv.status_code, 200)
-        self.assertEqual(rv.json, [{'name': 'Dove'}])
+        self.assertEqual(rv.json, [{
+            'name': 'Satellite 1',
+            'type': 'satellite',
+            'class': 'dove'
+        }])
