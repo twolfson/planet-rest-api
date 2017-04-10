@@ -3,6 +3,7 @@
 REST API coding challenge for Planet Labs
 
 TODO: Test server manually
+TODO: Document endpoints
 
 ## Requirements
 Before getting started, make sure the following tools are installed locally:
@@ -26,8 +27,13 @@ bin/bootstrap.sh
 
 # Start our server
 ./start.sh
+```
 
-# On future iterations, we can use
+Our server should be running at <http://localhost:3000/>. For making requests, see our documentation.
+
+**On future iterations, we can use:**
+
+```bash
 workon planet-rest-api
 ./start.sh
 ```
@@ -40,9 +46,6 @@ Tests can be run via:
 # Runs `nosetests`
 ./test.sh
 ```
-
-## Examples
-_(Coming soon)_
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Test via `nosetests`.
