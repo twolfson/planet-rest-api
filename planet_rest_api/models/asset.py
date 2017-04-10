@@ -1,9 +1,6 @@
 # Load in our dependencies
 from flask import abort
 
-# Define a store for all assets
-asset_map = {}
-
 # TODO: Disallow overwriting existing assets
 # TODO: Unit test bad names and spy our create method uses validate
 
@@ -24,6 +21,9 @@ class Asset(object):
         TYPE_ANTENNA: [CLASS_ANTENNA_DISH, CLASS_ANTENNA_YAGI],
     }
 
+    # Define a store for all assets
+    _asset_map = {}
+
     # Define our methods
     def __init__(self, name, type, klass):
         # Save our model information
@@ -32,22 +32,26 @@ class Asset(object):
         self.klass = klass
 
     @classmethod
+    def _reset(cls):
+        cls._asset_map = {}
+
+    @classmethod
     def get_all(cls):
-        return asset_map.values()
+        return cls._asset_map.values()
 
     @classmethod
     def get_or_404(self, name):
-        if name not in asset_map:
+        if name not in self._asset_map:
             abort(404)
         else:
-            return asset_map[name]
+            return self._asset_map[name]
 
     def save(self):
         # Run validation
         self.validate()
 
         # Save our model
-        asset_map[self.name] = self
+        self._asset_map[self.name] = self
 
     def validate(self):
         # Validate our asset name

@@ -41,7 +41,7 @@ class ApiTestCase(TestCase):
         self.app = planet_rest_api.app.test_client()
 
         # Wipe out our fixtures
-        planet_rest_api.assets = {}
+        Asset._reset()
 
     def tearDown(self):
         # Reset our config

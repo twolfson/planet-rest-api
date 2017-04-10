@@ -23,4 +23,4 @@ class AssetsNameGetTestCase(ApiTestCase):
 
         # receives no assets
         self.assertEqual(rv.status_code, 404)
-        self.assertEqual(rv.json, {'message': 'Asset not found'})
+        self.assertEqual(rv.json, {'message': 'Resource not found'})
