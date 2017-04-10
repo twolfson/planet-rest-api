@@ -77,11 +77,11 @@ We expose a REST API with JSON-based resources with the following endpoints:
 #### GET /
 Basic health check for our API
 
-**Params:**
+**Request body:**
 
 None
 
-**Response:**
+**Response body:**
 
 - message `String` - OK response from server
 
@@ -97,11 +97,11 @@ $ curl http://localhost:5000/
 #### GET /assets
 List all existing assets
 
-**Params:**
+**Request body:**
 
 None
 
-**Response:**
+**Response body:**
 
 - asset[] `list`
     - asset `Asset` - JSON representation of asset
@@ -122,11 +122,11 @@ $ curl http://localhost:5000/assets
 #### POST /assets
 Create a new asset
 
-**Params:**
+**Request body:**
 
 Parameters should match `Asset` specification (e.g. `name`, `type`)
 
-**Response:**
+**Response body:**
 
 Upon success, response will match serialized `Asset` result
 
@@ -147,10 +147,32 @@ $ curl -X POST http://localhost:5000/assets \
 }
 ```
 
+#### GET /assets/:name
+Retrieve an asset by its name
+
+**Request body:**
+
+None
+
+**Response body:**
+
+Upon success, response will be JSON representation of asset
+
+**Example:**
+
+```bash
+$ curl http://localhost:5000/assets/dove1
+{
+  "class": "dove",
+  "name": "dove1",
+  "type": "satellite"
+}
+```
+
 #### Error handlers
 If an error is encountered, then we will reply with the following format:
 
-**Response:**
+**Response body:**
 
 - message `String` - Explanation of error
 
