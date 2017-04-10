@@ -1,3 +1,6 @@
+# Load in our dependencies
+from flask import abort
+
 # Define a store for all assets
 asset_map = {}
 
@@ -28,6 +31,17 @@ class Asset(object):
         self.type = type
         self.klass = klass
 
+    @classmethod
+    def get_all(cls):
+        return asset_map.values()
+
+    @classmethod
+    def get_or_404(self, name):
+        if name not in asset_map:
+            abort(404)
+        else:
+            return asset_map[name]
+
     def save(self):
         # Run validation
         self.validate()
@@ -45,7 +59,3 @@ class Asset(object):
             'type': self.type,
             'class': self.klass,
         }
-
-    @classmethod
-    def get_all(cls):
-        return asset_map.values()

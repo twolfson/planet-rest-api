@@ -20,3 +20,14 @@ def assets_get():
         asset.serialize()
         for asset in Asset.get_all()
     ])
+
+
+@app.route('/assets/<name>', methods=['GET'])
+def assets_name_get(name):
+    asset = Asset.get_or_404(name)
+    return jsonify(asset.serialize())
+
+
+@app.errorhandler(404)
+def resource_not_found(error):
+    return jsonify({'message': 'Resource not found'}), 404

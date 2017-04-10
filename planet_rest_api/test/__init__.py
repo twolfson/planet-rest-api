@@ -12,7 +12,7 @@ Asset = planet_rest_api.Asset
 #   but this is a trivial project
 FIXTURES = {
     'satellite1': {
-        'name': 'Satellite 1',
+        'name': 'satellite1',
         'type': Asset.TYPE_SATELLITE,
         'klass': Asset.CLASS_SATELLITE_DOVE,
     }

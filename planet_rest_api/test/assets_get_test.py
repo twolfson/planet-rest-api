@@ -20,7 +20,7 @@ class AssetsGetTestCase(ApiTestCase):
         # receives expected assets
         self.assertEqual(rv.status_code, 200)
         self.assertEqual(rv.json, [{
-            'name': 'Satellite 1',
+            'name': 'satellite1',
             'type': 'satellite',
             'class': 'dove'
         }])
