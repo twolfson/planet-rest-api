@@ -5,11 +5,8 @@ python:
   - "3.3"
 
 install:
-  # Install `planet_rest_api`
-  - python setup.py develop
-
-  # Install dev requirements
-  - pip install -r requirements-dev.txt
+  # Bootstrap our package via same script as users
+  - bin/bootstrap.sh
 
 script:
   # Run our tests

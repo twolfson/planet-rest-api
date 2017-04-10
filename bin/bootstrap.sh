@@ -2,9 +2,9 @@
 # Exit on first error
 set -e
 
-# Install our dependencies
-pip install -r requirements.txt
+# Install our package
+python setup.py develop
+
+# Install dev dependencies
 pip install -r requirements-dev.txt
 
-# Register our package
-python setup.py develop
