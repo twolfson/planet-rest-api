@@ -49,3 +49,26 @@ class AssetsPostTestCase(ApiTestCase):
 
         # doesn't touch our database
         self.assertEqual(Asset.get_all(), [])
+
+    def test_already_exists(self):
+        # A request attempting to save over an existing asset
+        rv = self.post_response('/assets', data=json.dumps({
+            'name': 'test-satellite',
+            'type': 'satellite',
+            'class': 'rapideye',
+        }))
+        self.assertEqual(rv.status_code, 200)
+        rv = self.post_response('/assets', data=json.dumps({
+            'name': 'test-satellite',
+            'type': 'satellite',
+            'class': 'dove',
+        }))
+
+        # is rejected
+        self.assertEqual(rv.status_code, 400)
+        self.assertEqual(rv.json, {'message': 'Invalid request'})
+
+        # doesn't overwrite our existing asset
+        asset = Asset.get('test-satellite')
+        self.assertTrue(asset)
+        self.assertEqual(asset.klass, 'rapideye')

@@ -31,6 +31,9 @@ class Asset(object):
         self.type = type
         self.klass = klass
 
+        # Mark our asset as new
+        self.is_new = True
+
     @classmethod
     def _reset(cls):
         cls._asset_map = {}
@@ -54,8 +57,17 @@ class Asset(object):
         # Run validation
         self.validate()
 
-        # Save our model
-        self._asset_map[self.name] = self
+        # If our asset is new
+        if self.is_new is True:
+            # Assert it isn't overwriting an asset
+            if self.name in self._asset_map:
+                abort(400)
+
+            # Save it
+            self._asset_map[self.name] = self
+
+        # Otherwise, do nothing -- it's already in our db
+        self.is_new = False
 
     def validate(self):
         # Validate our asset name
