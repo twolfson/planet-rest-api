@@ -29,7 +29,7 @@ bin/bootstrap.sh
 bin/start.sh
 ```
 
-Our server should be running at <http://localhost:3000/>. For making requests, see our documentation.
+Our server should be running at <http://localhost:5000/>. For making requests, see our documentation.
 
 **On future iterations, we can use:**
 
