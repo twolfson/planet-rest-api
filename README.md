@@ -36,7 +36,7 @@ bin/start.sh
 ```
 
 ## Documentation
-### Types
+### Resources
 We have the following resource types:
 
 #### Asset
