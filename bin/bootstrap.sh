@@ -5,3 +5,6 @@ set -e
 # Install our dependencies
 pip install -r requirements.txt
 pip install -r requirements-dev.txt
+
+# Register our package
+python setup.py develop

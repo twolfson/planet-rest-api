@@ -5,10 +5,8 @@ setup(
     name='planet_rest_api',
     version='1.0.0',
     description='REST API coding challenge for Planet Labs',
-    long_description=open('README.rst').read(),
-    keywords=[
-        
-    ],
+    long_description=open('README.md').read(),
+    keywords=[],
     author='Todd Wolfson',
     author_email='todd@twolfson.com',
     url='https://github.com/twolfson/planet-rest-api',
