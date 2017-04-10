@@ -26,7 +26,7 @@ mkvirtualenv planet-rest-api
 bin/bootstrap.sh
 
 # Start our server
-./start.sh
+bin/start.sh
 ```
 
 Our server should be running at <http://localhost:3000/>. For making requests, see our documentation.
@@ -35,7 +35,7 @@ Our server should be running at <http://localhost:3000/>. For making requests, s
 
 ```bash
 workon planet-rest-api
-./start.sh
+bin/start.sh
 ```
 
 ## Documentation
@@ -44,11 +44,11 @@ Tests can be run via:
 
 ```bash
 # Runs `nosetests`
-./test.sh
+bin/test.sh
 ```
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Test via `nosetests`.
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Test via `bin/test.sh`.
 
 ## Unlicense
 As of Apr 10 2017, Todd Wolfson has released this repository and its contents to the public domain.
