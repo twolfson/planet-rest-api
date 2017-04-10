@@ -2,12 +2,34 @@
 
 REST API coding challenge for Planet Labs
 
-## Getting Started
-Install the module with: `pip install planet_rest_api`
+TODO: Test server manually
 
-```python
-from planet_rest_api import run
-run()
+## Requirements
+Before getting started, make sure the following tools are installed locally:
+
+- Python 2.7
+- [virutalenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
+
+## Getting Started
+To get a local copy of our repository running, run the following:
+
+```bash
+# Clone our repository
+git clone git@github.com:twolfson/planet-rest-api.git
+cd planet-rest-api
+
+# Set up a virtual environment
+mkvirtualenv planet-rest-api
+
+# Install our dependencies
+bin/bootstrap.sh
+
+# Start our server
+./start.sh
+
+# On future iterations, we can use
+workon planet-rest-api
+./start.sh
 ```
 
 ## Documentation
