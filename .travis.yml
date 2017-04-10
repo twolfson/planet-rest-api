@@ -4,6 +4,9 @@ python:
   - "2.7"
 
 install:
+  # Upgrade Travis CI's `pip` to avoid install issues
+  - pip install --upgrade pip
+
   # Bootstrap our package via same script as users
   - bin/bootstrap.sh
 
