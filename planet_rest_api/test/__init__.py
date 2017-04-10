@@ -12,9 +12,10 @@ class ApiTestCase(TestCase):
     @classmethod
     def setUpClass(cls):
         """On inherited classes, run our `setUp` method"""
-        # Inspired via http://stackoverflow.com/questions/1323455/python-unit-test-with-base-and-sub-class/17696807#17696807
+        # Inspired via http://stackoverflow.com/questions/1323455/python-unit-test-with-base-and-sub-class/17696807#17696807 # noqa
         if cls is not ApiTestCase and cls.setUp is not ApiTestCase.setUp:
             orig_setUp = cls.setUp
+
             def setUpOverride(self, *args, **kwargs):
                 ApiTestCase.setUp(self)
                 return orig_setUp(self, *args, **kwargs)
