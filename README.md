@@ -2,8 +2,6 @@
 
 REST API coding challenge for Planet Labs
 
-TODO: Document endpoints
-
 ## Requirements
 Before getting started, make sure the following tools are installed locally:
 
@@ -38,6 +36,128 @@ bin/start.sh
 ```
 
 ## Documentation
+### Types
+We have the following resource types:
+
+#### Asset
+Dictionary containing information about physical asset. It has the following structure:
+
+- name `String` - Name of asset
+    - This must be unique across all access
+    - This may only contain alphanumeric ASCII characters, underscores, and dashes
+    - This cannot start with an underscore or dash
+    - This must be between 4 and 64 characters long
+- type `String` - Type of asset
+    - This must be either "satellite" or "antenna"
+- class `String` - Class of asset, depends on `type`
+    - For a "satellite" asset, this must be either "dove" or "rapideye"
+    - For an "antenna" asset, this must be either "dish" or "yagi"
+
+**Examples:**
+
+```json
+{
+  "name": "dove1",
+  "type": "satellite",
+  "class": "dove"
+}
+```
+
+```json
+{
+  "name": "yagi3",
+  "type": "antenna",
+  "class": "yagi3"
+}
+```
+
+### API
+We expose a REST API with JSON-based resources with the following endpoints:
+
+#### GET /
+Basic health check for our API
+
+**Params:**
+
+None
+
+**Response:**
+
+- message `String` - OK response from server
+
+**Example:**
+
+```bash
+$ curl http://localhost:5000/
+{
+  "message": "OK"
+}
+```
+
+#### GET /assets
+List all existing assets
+
+**Params:**
+
+None
+
+**Response:**
+
+- asset[] `list`
+    - asset `Asset` - JSON representation of asset
+
+**Example:**
+
+```bash
+$ curl http://localhost:5000/assets
+[
+  {
+    "name": "dove1",
+    "type": "satellite",
+    "class": "dove"
+  }
+]
+```
+
+#### POST /assets
+Create a new asset
+
+**Params:**
+
+Parameters should match `Asset` specification (e.g. `name`, `type`)
+
+**Response:**
+
+Upon success, response will match serialized `Asset` result
+
+**Example:**
+
+```bash
+$ curl -X POST http://localhost:5000/assets \
+  -H 'Content-Type: application/json' \
+  --data '{
+    "name": "dove1",
+    "type": "satellite",
+    "class": "dove"
+  }'
+{
+  "name": "dove1",
+  "type": "satellite",
+  "class": "dove"
+}
+```
+
+#### Error handlers
+If an error is encountered, then we will reply with the following format:
+
+**Response:**
+
+- message `String` - Explanation of error
+
+**Notes:**
+
+We will also send an HTTP status code matching the error (e.g. 400, 404, 500).
+
 ### Testing
 Tests can be run via:
 
