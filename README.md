@@ -33,7 +33,13 @@ workon planet-rest-api
 ```
 
 ## Documentation
-_(Coming soon)_
+### Testing
+Tests can be run via:
+
+```bash
+# Runs `nosetests`
+./test.sh
+```
 
 ## Examples
 _(Coming soon)_
