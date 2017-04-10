@@ -40,6 +40,10 @@ class Asset(object):
         return cls._asset_map.values()
 
     @classmethod
+    def get(self, name):
+        return self._asset_map.get(name)
+
+    @classmethod
     def get_or_404(self, name):
         if name not in self._asset_map:
             abort(404)
