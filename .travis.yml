@@ -13,7 +13,7 @@ install:
 
 script:
   # Run our tests
-  - ./test.sh
+  - bin/test.sh
 
 notifications:
   email:

@@ -3,4 +3,4 @@
 set -e
 
 # Run our tests
-nosetests $*
+nosetests --nocapture $*
