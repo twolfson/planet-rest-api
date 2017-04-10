@@ -63,6 +63,9 @@ class ApiTestCase(TestCase):
     def get_response(self, pathname, *args, **kwargs):
         return self._load_response('get', pathname, *args, **kwargs)
 
+    def post_response(self, pathname, *args, **kwargs):
+        return self._load_response('post', pathname, *args, **kwargs)
+
     # Define fixture helpers
     def install_fixtures(self, keys):
         # Resolve our fixtures
