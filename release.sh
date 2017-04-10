@@ -3,7 +3,7 @@
 set -e
 
 # Install our dependencies
-npm install foundry@~4.0.3 foundry-release-git@~2.0.2 foundry-release-pypi@~2.0.1
+npm install foundry@~4.0.3 foundry-release-git@~2.0.2
 
 # Run foundry release with an adjusted PATH
 PATH="$PATH:$PWD/node_modules/.bin/"
