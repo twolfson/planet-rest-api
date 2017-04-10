@@ -47,4 +47,5 @@ class AssetsPostTestCase(ApiTestCase):
         self.assertEqual(rv.status_code, 400)
         self.assertEqual(rv.json, {'message': 'Invalid request'})
 
-        # TODO: Assert db is empty
+        # doesn't touch our database
+        self.assertEqual(Asset.get_all(), [])
