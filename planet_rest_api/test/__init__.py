@@ -4,6 +4,17 @@ import json
 from unittest import TestCase
 
 import planet_rest_api
+Asset = planet_rest_api.Asset
+
+
+# Define our fixtures
+# DEV: In a database setup, these would be separate files
+#   but this is a trivial project
+FIXTURES = {
+    'dove': {
+        'name': 'Dove',
+    }
+}
 
 
 # Define our base test case
@@ -22,14 +33,19 @@ class ApiTestCase(TestCase):
             cls.setUp = setUpOverride
 
     def setUp(self):
+        # Create our test client
         # http://flask.pocoo.org/docs/0.12/testing/
         planet_rest_api.app.config['TESTING'] = True
         self.app = planet_rest_api.app.test_client()
 
+        # Wipe out our fixtures
+        planet_rest_api.assets = {}
+
     def tearDown(self):
+        # Reset our config
         del planet_rest_api.app.config['TESTING']
 
-    # Helper methods
+    # HTTP helper methods
     def _load_response(self, method, pathname, parse_json=True, *args, **kwargs):
         # Make our request
         method_fn = getattr(self.app, method)
@@ -44,3 +60,14 @@ class ApiTestCase(TestCase):
 
     def get_response(self, pathname, *args, **kwargs):
         return self._load_response('get', pathname, *args, **kwargs)
+
+    # Define fixture helpers
+    def install_fixtures(self, keys):
+        # Resolve our fixtures
+        # DEV: This will throw key errors when we can't find a fixture
+        fixtures = [FIXTURES[key] for key in keys]
+
+        # Install our fixtures
+        for fixture in fixtures:
+            asset = Asset(**fixture)
+            asset.save()
