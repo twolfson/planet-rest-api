@@ -5,13 +5,31 @@ from flask import Flask, jsonify
 app = Flask(__name__)
 
 
+# Define our assets class
+# TODO: Relocate into models file
+class Asset(object):
+    def __init__(self, name):
+        self.name = name
+
+    def serialize(self):
+        return {
+            'name': self.name,
+        }
+
+
+# Define our assets
+assets = [Asset('Dove')]
+
+
 # Bind our routes
-@app.route('/')
+@app.route('/', methods=['GET'])
 def root():
     return jsonify({'message': 'OK'})
 
 
-@app.route('/asset')
-def asset_list():
+@app.route('/assets', methods=['GET'])
+def assets_get():
     return jsonify([
+        asset.serialize()
+        for asset in assets
     ])
