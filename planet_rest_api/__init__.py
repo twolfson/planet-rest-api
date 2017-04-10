@@ -36,8 +36,17 @@ def assets_get():
 
 @app.route('/assets', methods=['POST'])
 def assets_name_post():
-    print(request.body['foo'])
-    return jsonify({})
+    # Generate our asset
+    # DEV: We are using `flask-json-multidict` which will raise a `BadRequestKeyError` on a missing parameter
+    asset = Asset(
+        name=request.body['name'],
+        type=request.body['type'],
+        klass=request.body['class'],
+    )
+
+    # Save and reply with our asset
+    asset.save()
+    return jsonify(asset.serialize())
 
 
 @app.route('/assets/<name>', methods=['GET'])

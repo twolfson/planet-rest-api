@@ -51,6 +51,9 @@ class ApiTestCase(TestCase):
     def _load_response(self, method, pathname, parse_json=True, *args, **kwargs):
         # Make our request
         method_fn = getattr(self.app, method)
+        if 'data' in kwargs:
+            kwargs['headers'] = kwargs.get('headers', {})
+            kwargs['headers']['Content-Type'] = kwargs['headers'].get('Content-Type', 'application/json')
         rv = method_fn(pathname, *args, **kwargs)
 
         # Parse our JSON
