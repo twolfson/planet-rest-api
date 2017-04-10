@@ -4,6 +4,7 @@ REST API coding challenge for Planet Labs
 
 TODO: Test server manually
 TODO: Document endpoints
+TODO: Set TODOs
 
 ## Requirements
 Before getting started, make sure the following tools are installed locally:

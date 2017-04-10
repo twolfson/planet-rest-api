@@ -1,30 +1,11 @@
 # Load in our dependencies
 from flask import Flask, jsonify
 
+from planet_rest_api.models.asset import Asset
+
+
 # Define our application
 app = Flask(__name__)
-
-
-# Define our assets class
-# TODO: Relocate into models file
-class Asset(object):
-    # Define a store for all assets
-    asset_map = {}
-
-    def __init__(self, name):
-        self.name = name
-
-    def save(self):
-        self.asset_map[self.name] = self
-
-    def serialize(self):
-        return {
-            'name': self.name,
-        }
-
-    @classmethod
-    def get_all(cls):
-        return cls.asset_map.values()
 
 
 # Bind our routes
