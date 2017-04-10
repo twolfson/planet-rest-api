@@ -30,10 +30,10 @@ class ApiTestCase(TestCase):
         del planet_rest_api.app.config['TESTING']
 
     # Helper methods
-    def _load_response(self, method, parse_json=True, *args, **kwargs):
+    def _load_response(self, method, pathname, parse_json=True, *args, **kwargs):
         # Make our request
         method_fn = getattr(self.app, method)
-        rv = method_fn(*args, **kwargs)
+        rv = method_fn(pathname, *args, **kwargs)
 
         # Parse our JSON
         if parse_json:
@@ -42,5 +42,5 @@ class ApiTestCase(TestCase):
         # Return our result
         return rv
 
-    def get_response(self, *args, **kwargs):
-        return self._load_response('get', *args, **kwargs)
+    def get_response(self, pathname, *args, **kwargs):
+        return self._load_response('get', pathname, *args, **kwargs)

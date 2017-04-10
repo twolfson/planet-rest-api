@@ -6,9 +6,8 @@ from planet_rest_api.test import ApiTestCase
 class AssetsGetTestCase(ApiTestCase):
     def test_empty(self):
         # A request to an empty `GET /assets` endpoint
-        rv = self.app.get('/assets')
+        rv = self.get_response('/assets')
 
         # receives no assets
         self.assertEqual(rv.status_code, 200)
-        self.assertEqual(rv.data, [])
-        self.assertEqual(rv.json, [])
+        self.assertEqual(rv.json, [{'name': 'Dove'}])
