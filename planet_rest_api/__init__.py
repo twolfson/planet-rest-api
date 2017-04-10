@@ -15,7 +15,7 @@ app = Flask(__name__)
 def resolve_request_body():
     """Before every request, resolve `request.body` from either `request.form` or `request.get_json()`"""
     request.body = request.form
-    if request.headers['content-type'] == 'application/json':
+    if request.headers.get('content-type') == 'application/json':
         request.body = get_json_multidict(request)
 app.before_request(resolve_request_body) # noqa
 
