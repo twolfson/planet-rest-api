@@ -1,8 +1,7 @@
 # Load in our dependencies
-from flask import abort
+import re
 
-# TODO: Disallow overwriting existing assets
-# TODO: Unit test bad names and spy our create method uses validate
+from flask import abort
 
 
 # Define our Asset class
@@ -71,7 +70,17 @@ class Asset(object):
 
     def validate(self):
         # Validate our asset name
-        pass
+        # DEV: We could use a custom error here and add a custom handler
+        #   but for this exercise, a Flask error should work
+        # DEV: We assert length first to avoid errors with `self.name[0]`
+        if len(self.name) < 4:
+            abort(400, 'Name is too short (under 4 characters)')
+        if len(self.name) > 64:
+            abort(400, 'Name is too long (over 64 characters)')
+        if re.search(r'[^A-Za-z0-9\-_]', self.name):
+            abort(400, 'Name contains non-alphanumeric, dash, or underscore characters')
+        if self.name[0] in ['-', '_']:
+            abort(400, 'Name begins with a dash or underscore')
 
     def serialize(self):
         return {
